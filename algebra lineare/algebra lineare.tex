@@ -61,6 +61,43 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 
 \subsection{Combinazioni Lineari}
 
+\begin{definition}{Combinazione Lineare}{combinazione_lineare}
+    \begin{itemize}
+        \item La combinazione lineare è il prodotto di un \hyperlink{def:vettore}{vettore} per uno scalare.
+        \item Le combinazioni lineari di un vettore sono l'insieme di tutti i vettori risultanti dal prodotto di quel vettore e uno scalare $\lambda$.
+        \item Le combinazioni lineari di più vettori insieme sono l'insieme di tutte le somme vettoriali di tutte le combinazioni di combinazioni lineari di ciascuno dei vettori. In notazione: \it{guardare definizione di \hyperlink{def:span}{$SPAN$}}
+    \end{itemize}
+\end{definition}
+
+\begin{definition}{Funzione SPAN}{funzione_span}
+    La funzione SPAN prende in ingresso un insieme di \hyperlink{def:vettore}{vettori} e ritorna l'insieme delle loro combinazioni lineari.
+    
+    In notazione: \begin{itemize}
+        \item \[SPAN(\begin{pmatrix}
+            x_1 \\
+            \vdots \\
+            x_n
+            \end{pmatrix}) = \{\begin{pmatrix}
+            \lambda x_1 \\
+            \vdots \\
+            \lambda x_n
+            \end{pmatrix} : \lambda \in \mathbb{R}\}\]
+        \item \[SPAN(\begin{pmatrix}
+            1 \\
+            0
+            \end{pmatrix}, \begin{pmatrix}
+            0 \\
+            1
+            \end{pmatrix}) = \{ \lambda\begin{pmatrix}
+            1 \\
+            0
+            \end{pmatrix} + r\begin{pmatrix}
+            0 \\
+            1
+            \end{pmatrix} : \lambda, r \in \mathbb{R}\}\]
+    \end{itemize}
+\end{definition}
+
 \section{Matrici}
 
 \begin{definition}{Matrice}{matrice}
