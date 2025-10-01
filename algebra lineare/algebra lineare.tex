@@ -64,9 +64,114 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \section{Matrici}
 
 \begin{definition}{Matice}{matrice}
-    Una matrice è un \hyperlink{def:vettore}{vettore} bidimensionale $m \times n$
+    Una matrice è un \hyperlink{def:vettore}{vettore} bidimensionale $m \times n$. In notazione: $\begin{pmatrix}
+    a_{11} & a_{12} & \cdots & a_{1n} \\
+    a_{21} & a_{22} & \cdots & a_{2n} \\
+    \vdots & \vdots & \ddots & \vdots \\
+    a_{m1} & a_{m2} & \cdots & a_{mn}
+    \end{pmatrix}$ Esempio di matrice di campo $\mathbb{N}$ e di dimensione $2 \times 3$: $\begin{pmatrix}
+    1 & 4 \\
+    3 & 7 \\
+    2 & 13
+    \end{pmatrix}$
 \end{definition}
 
 \subsection{Tipologie di Matrici}
+
+\subsubsection*{Matrice Quadrata}
+Una matrice si dice quadrata se il numero di righe è uguale al numero di colonne ($m=n$).
+\paragraph{Notazione:}
+\[ A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{21} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix} \]
+\paragraph{Esempio:} Matrice quadrata $3 \times 3$:
+\[ \begin{pmatrix}
+1 & 2 & 3 \\
+4 & 5 & 6 \\
+7 & 8 & 9
+\end{pmatrix} \]
+
+\subsubsection*{Matrice Triangolare Superiore}
+Una matrice quadrata si dice triangolare superiore se tutti gli elementi al di sotto della diagonale principale sono nulli ($a_{ij} = 0$ per $i>j$).
+\paragraph{Notazione:}
+\[ U = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+0 & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & a_{nn}
+\end{pmatrix} \]
+\paragraph{Esempio:}
+\[ \begin{pmatrix}
+1 & 2 & 3 \\
+0 & 5 & 6 \\
+0 & 0 & 9
+\end{pmatrix} \]
+
+\subsubsection*{Matrice Triangolare Inferiore}
+Una matrice quadrata si dice triangolare inferiore se tutti gli elementi al di sopra della diagonale principale sono nulli ($a_{ij} = 0$ per $i<j$).
+\paragraph{Notazione:}
+\[ L = \begin{pmatrix}
+a_{11} & 0 & \cdots & 0 \\
+a_{21} & a_{22} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{n1} & a_{n2} & \cdots & a_{nn}
+\end{pmatrix} \]
+\paragraph{Esempio:}
+\[ \begin{pmatrix}
+1 & 0 & 0 \\
+4 & 5 & 0 \\
+7 & 8 & 9
+\end{pmatrix} \]
+
+\subsubsection*{Matrice Diagonale}
+Una matrice quadrata si dice diagonale se tutti gli elementi al di fuori della diagonale principale sono nulli ($a_{ij} = 0$ per $i \neq j$). È sia triangolare superiore che inferiore.
+\paragraph{Notazione:}
+\[ D = \begin{pmatrix}
+a_{11} & 0 & \cdots & 0 \\
+0 & a_{22} & \cdots & 0 \\
+\vdots & \vdots & \ddots & \vdots \\
+0 & 0 & \cdots & a_{nn}
+\end{pmatrix} \]
+\paragraph{Esempio:}
+\[ \begin{pmatrix}
+1 & 0 & 0 \\
+0 & 5 & 0 \\
+0 & 0 & 9
+\end{pmatrix} \]
+
+\subsubsection*{Matrice Simmetrica}
+Una matrice quadrata si dice simmetrica se è uguale alla sua trasposta ($A = A^T$), ovvero se $a_{ij} = a_{ji}$ per ogni $i,j$.
+\paragraph{Notazione:}
+\[ A = \begin{pmatrix}
+a_{11} & a_{12} & \cdots & a_{1n} \\
+a_{12} & a_{22} & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+a_{1n} & a_{2n} & \cdots & a_{nn}
+\end{pmatrix} \]
+\paragraph{Esempio:}
+\[ \begin{pmatrix}
+1 & 2 & 3 \\
+2 & 5 & 6 \\
+3 & 6 & 9
+\end{pmatrix} \]
+
+\subsubsection*{Matrice Anti-simmetrica}
+Una matrice quadrata si dice anti-simmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$. Questo implica che gli elementi sulla diagonale principale sono nulli ($a_{ii} = 0$).
+\paragraph{Notazione:}
+\[ A = \begin{pmatrix}
+0 & a_{12} & \cdots & a_{1n} \\
+-a_{12} & 0 & \cdots & a_{2n} \\
+\vdots & \vdots & \ddots & \vdots \\
+-a_{1n} & -a_{2n} & \cdots & 0
+\end{pmatrix} \]
+\paragraph{Esempio:}
+\[ \begin{pmatrix}
+0 & 2 & -3 \\
+-2 & 0 & 6 \\
+3 & -6 & 0
+\end{pmatrix} \]
 
 \end{document}
