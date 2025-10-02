@@ -38,7 +38,7 @@
 \end{definition}
 
 \begin{definition}{Spazio Vettoriale}{spazio_vettoriale}
-    Uno \textbf{spazio vettoriale} su un campo $\mathbb{K}$ è un insieme di \hyperlink{def:vettore}{vettori} $V$ che definisce due operazioni:
+    Uno \textbf{spazio vettoriale} su un campo $\mathbb{K}$ è un insieme di \hyperref[def:vettore]{vettori} $V$ che definisce due operazioni:
     \begin{enumerate}
         \item Addizione fra vettori: $V + V \to V$
         \item Moltiplicazione scalare: $\mathbb{K} \times V \to V$
@@ -56,21 +56,21 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \subsection{Sottospazi Vettoriali}
 
 \begin{definition}{Sottospazio Vettoriale}{sottospazio_vettoriale}
-    Un sottospazio vettoriale è uno \hyperlink{def:spazio_vettoriale}{spazio vettoriale} $W$ incluso in uno spazio vettoriale $V$. Ogni operazione fra vettori di $W$ ritorna un vettore incluso in $W$. Ogni sottospazio vettoriale include l'elemento neutro dello spazio vettoriale.
+    Un sottospazio vettoriale è uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} $W$ incluso in uno spazio vettoriale $V$. Ogni operazione fra vettori di $W$ ritorna un vettore incluso in $W$. Ogni sottospazio vettoriale include l'elemento neutro dello spazio vettoriale.
 \end{definition}
 
 \subsection{Combinazioni Lineari}
 
 \begin{definition}{Combinazione Lineare}{combinazione_lineare}
     \begin{itemize}
-        \item La combinazione lineare è il prodotto di un \hyperlink{def:vettore}{vettore} per uno scalare.
+        \item La combinazione lineare è il prodotto di un \hyperref[def:vettore]{vettore} per uno scalare.
         \item Le combinazioni lineari di un vettore sono l'insieme di tutti i vettori risultanti dal prodotto di quel vettore e uno scalare $\lambda$.
-        \item Le combinazioni lineari di più vettori insieme sono l'insieme di tutte le somme vettoriali di tutte le combinazioni di combinazioni lineari di ciascuno dei vettori. In notazione: \it{guardare definizione di \hyperlink{def:span}{$SPAN$}}
+        \item Le combinazioni lineari di più vettori insieme sono l'insieme di tutte le somme vettoriali di tutte le combinazioni di combinazioni lineari di ciascuno dei vettori. In notazione: \it{guardare definizione di \hyperref[def:funzione_span]{SPAN}}
     \end{itemize}
 \end{definition}
 
 \begin{definition}{Funzione SPAN}{funzione_span}
-    La funzione SPAN prende in ingresso un insieme di \hyperlink{def:vettore}{vettori} e ritorna l'insieme delle loro combinazioni lineari.
+    La funzione SPAN prende in ingresso un insieme di \hyperref[def:vettore]{vettori} e ritorna l'insieme delle loro combinazioni lineari.
     
     In notazione: \begin{itemize}
         \item \[SPAN(\begin{pmatrix}
@@ -98,10 +98,18 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
     \end{itemize}
 \end{definition}
 
+\begin{definition}{Dipendenza Lineare}{dipendenza_lineare}
+    Dei \hyperref[def:vettore]{vettori} sono linearmente indipendenti se nessuno di loro può essere espresso come \hyperref[def:combinazione_lineare]{combinazione lineare} degli altri.
+\end{definition}
+
+\begin{definition}{Base}{base}
+    Ognuna delle basi di un insieme di \hyperref[def:vettore]{vettori} è un suo sottoinsieme di vettori \hyperref[def:dipendenza_lineare]{linearmente indipendenti} e la cui combinazione lineare genera l'insieme di partenza stesso.
+\end{definition}
+
 \section{Matrici}
 
 \begin{definition}{Matrice}{matrice}
-    Una matrice è un \hyperlink{def:vettore}{vettore} bidimensionale $m \times n$. In notazione: $\begin{pmatrix}
+    Una matrice è un \hyperref[def:vettore]{vettore} bidimensionale $m \times n$. In notazione: $\begin{pmatrix}
     a_{11} & a_{12} & \cdots & a_{1n} \\
     a_{21} & a_{22} & \cdots & a_{2n} \\
     \vdots & \vdots & \ddots & \vdots \\
@@ -114,7 +122,7 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \end{definition}
 
 \begin{definition}{Traccia}{traccia}
-    La traccia di una \hyperlink{def:matrice}{matrice} è la somma degli elementi sulla sua diagonale principale. Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è 13.
+    La traccia di una \hyperref[def:matrice]{matrice} è la somma degli elementi sulla sua diagonale principale. Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è 13.
 \end{definition}
 
 \subsection{Tipologie di Matrici}
