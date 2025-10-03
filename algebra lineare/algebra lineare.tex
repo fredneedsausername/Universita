@@ -79,7 +79,7 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 
 \begin{definition}{Combinazione Lineare}{combinazione_lineare}
     \begin{itemize}
-        \item La combinazione lineare è il prodotto di un \hyperref[def:vettore]{vettore} per uno scalare.
+        \item La combinazione lineare è il prodotto di un \hyperref[def:vettore]{vettore} per uno scalare diverso da zero.
         \item Le combinazioni lineari di un vettore sono l'insieme di tutti i vettori risultanti dal prodotto di quel vettore e uno scalare $\lambda$.
         \item Le combinazioni lineari di più vettori insieme sono l'insieme di tutte le somme vettoriali di tutte le combinazioni di combinazioni lineari di ciascuno dei vettori. In notazione: \it{guardare definizione di \hyperref[def:funzione_span]{SPAN}}
     \end{itemize}
@@ -112,6 +112,8 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
             1
             \end{pmatrix} : \lambda, r \in \mathbb{R}\}\]
     \end{itemize}
+
+    Si possono permutare i vettori all'interno dell'insieme che viene passato a SPAN, visto che la combinazione lineare permette permutazione.
 \end{definition}
 
 \begin{definition}{Dipendenza Lineare}{dipendenza_lineare}
@@ -122,6 +124,14 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
     Ognuna delle basi di un insieme di \hyperref[def:vettore]{vettori} è un suo sottoinsieme di vettori \hyperref[def:dipendenza_lineare]{linearmente indipendenti} e la cui combinazione lineare genera l'insieme di partenza stesso
 
     "Da una base, con un vettore di coefficienti, posso ricavare qualsiasi vettore"
+\end{definition}
+
+\begin{definition}{Cardinalità}{cardinalita}
+    Il numero di elementi di una base.
+\end{definition}
+
+\begin{definition}{Dimensione di Uno Spazio Vettoriale}{dimensione_spazio_vettoriale}
+    La cardinalità di una qualunque base dello spazio vettoriale analizzato.
 \end{definition}
 
 \begin{exercise}{Basi}{}
@@ -159,9 +169,79 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
     Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori, pari all'ordine dello spazio vettoriale.
 \end{exercise}
 
-\begin{theorem}{Teorema \dots}{}
-    \[SPAN(v_1, v_2, v_3) = SPAN(v_1, v_2, v_3 + SPAN(v_1, v_2))\]  
-\end{theorem}
+\subsection{Trovare la Base di Vettori}
+
+La combinazione lineare è invertibile perché:
+\begin{itemize}
+    \item A ogni vettore che è stato moltiplicato per uno scalare \lambda si può moltiplicare il reciproco di quello scalare $\lambda ^{-1}$ e tornare al vettore di partenza;
+    \item A ogni vettore $v_1$ a cui è stato sommato un vettore $v_2$ si può sommare un vettore $v_2$ moltiplicato per uno scalare $-1$, cioè $-v_2$, per tornare al vettore di partenza.
+\end{itemize}
+
+Essendo \hyperref[def:funzione_span]{$SPAN$} invertibile, allora è possibile enunciare quanto segue. Presa \hyperref[def:funzione_span]{$SPAN$} come la funzione che parte da una base $e$ per arrivare a un insieme di vettori $V$, ed essendo \hyperref[def:funzione_span]{$SPAN$} invertibile, allora \hyperref[def:funzione_span]{$SPAN$} è anche la funzione che parte da $V$ per arrivare ad $e$. Quindi, preso un insieme di vettori, è possibile, grazie a \hyperref[def:funzione_span]{$SPAN$}, ricavare una delle basi che potrebbe generarlo.
+
+Facciamo un esempio operativo di come applicare un algoritmo per ricavare una base di un insieme di vettori.
+
+\[SPAN(\begin{pmatrix}
+    1 \\
+    0 \\
+    1
+\end{pmatrix}, \begin{pmatrix}
+    2 \\
+    1 \\
+    1
+\end{pmatrix}, \begin{pmatrix}
+    -1 \\
+    1 \\
+    -1
+\end{pmatrix})\]
+
+Mettiamolo in forma di matrice:
+
+\[\begin{pmatrix}
+1 & 2 & -1 \\
+0 & 1 & 1 \\
+1 & 1 & -1
+\end{pmatrix}\]
+
+Moltiplichiamo per $-2$ temporaneamente il primo vettore, sommiamolo al secondo vettore, e moltiplichiamo per $\frac{1}{2}$ il primo vettore per farlo tornare al suo stato iniziale (questi passaggi intermedi che modificano temporaneamente un vettore ai fini di una operazione sono frequenti, infatti non verranno spiegati in futuro):
+
+\[\begin{pmatrix}
+1 & 0 & -1 \\
+0 & 1 & 1 \\
+1 & -1 & -1
+\end{pmatrix}\]
+
+Sommiamo al terzo vettore il primo:
+
+\[\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 1 \\
+1 & -1 & 0
+\end{pmatrix}\]
+
+Sottraiamo (richiesto passaggio intermedio di moltiplicazione per $-1$, omesso) al secondo il terzo.
+
+\[\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 0 & 1 \\
+1 & -1 & 0
+\end{pmatrix}\]
+
+Permutiamo (operazione di \hyperref[def:funzione_span]{$SPAN$} concessa) per avere uno schema a scalini
+
+\[\begin{pmatrix}
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+1 & 0 & -1
+\end{pmatrix}\]
+
+Come si può notare adesso si ha una \hyperref[def:matrice_triangolare_inferiore]{matrice triangolare inferiore}, e quindi si è sicuri che i vettori siano fra loro linearmente indipendenti, che è l'altra condizione necessaria perché la matrice ricavata sia una base. Questa si dice anche matrice a scalino, perché se gli zero fossero aria e i numeri il materiale di cui è fatta la scala, si avrebbe una scala. Non è condizione necessaria che la matrice ottenuta sia una matrice triangolare inferiore, l'importante è che sia a scalino
+
+La dimostrazione che una matrice così fatta sia composta da vettori linearmente indipendenti la lasciamo al lettore come esercizio. (E' una battuta, non ci provare nemmeno a dimostrarlo)
+
+\begin{exercise}{Ricavare una Base di Matrici in $\mathbb{R}^n$}{}
+    Esecizi a piacere su matrici a piacere. Si ricorda che si cerca, idealmente, la base canonica, quindi partire con un numero di vettori pari al loro numero di elementi pari alla \hyperref[def:dimensione_spazio_vettoriale]{dimensione} di $\mathbb{R}$ utilizzata.
+\end{exercise}
 
 \section{Matrici}
 
@@ -184,7 +264,7 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 
 \subsection{Tipologie di Matrici}
 
-\subsubsection*{Matrice Quadrata}
+\begin{definition}{Matrice Quadrata}{matrice_quadrata}
 Una matrice si dice quadrata se il numero di righe è uguale al numero di colonne ($m=n$).
 \paragraph{Notazione:}
 \[ A = \begin{pmatrix}
@@ -199,8 +279,9 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 4 & 5 & 6 \\
 7 & 8 & 9
 \end{pmatrix} \]
+\end{definition}
 
-\subsubsection*{Matrice Triangolare Superiore}
+\begin{definition}{Matrice Triangolare Superiore}{matrice_triangolare_superiore}
 Una matrice quadrata si dice triangolare superiore se tutti gli elementi al di sotto della diagonale principale sono nulli ($a_{ij} = 0$ per $i>j$).
 \paragraph{Notazione:}
 \[ U = \begin{pmatrix}
@@ -215,8 +296,9 @@ a_{11} & a_{12} & \cdots & a_{1n} \\
 0 & 5 & 6 \\
 0 & 0 & 9
 \end{pmatrix} \]
+\end{definition}
 
-\subsubsection*{Matrice Triangolare Inferiore}
+\begin{definition}{Matrice Triangolare Inferiore}{matrice_triangolare_inferiore}
 Una matrice quadrata si dice triangolare inferiore se tutti gli elementi al di sopra della diagonale principale sono nulli ($a_{ij} = 0$ per $i<j$).
 \paragraph{Notazione:}
 \[ L = \begin{pmatrix}
@@ -231,8 +313,9 @@ a_{n1} & a_{n2} & \cdots & a_{nn}
 4 & 5 & 0 \\
 7 & 8 & 9
 \end{pmatrix} \]
+\end{definition}
 
-\subsubsection*{Matrice Diagonale}
+\begin{definition}{Matrice Diagonale}{matrice_diagonale}
 Una matrice quadrata si dice diagonale se tutti gli elementi al di fuori della diagonale principale sono nulli ($a_{ij} = 0$ per $i \neq j$). È sia triangolare superiore che inferiore.
 \paragraph{Notazione:}
 \[ D = \begin{pmatrix}
@@ -247,8 +330,9 @@ a_{11} & 0 & \cdots & 0 \\
 0 & 5 & 0 \\
 0 & 0 & 9
 \end{pmatrix} \]
+\end{definition}
 
-\subsubsection*{Matrice Simmetrica}
+\begin{definition}{Matrice Simmetrica}{matrice_simmetrica}
 Una matrice quadrata si dice simmetrica se è uguale alla sua trasposta ($A = A^T$), ovvero se $a_{ij} = a_{ji}$ per ogni $i,j$.
 \paragraph{Notazione:}
 \[ A = \begin{pmatrix}
@@ -263,8 +347,9 @@ a_{1n} & a_{2n} & \cdots & a_{nn}
 2 & 5 & 6 \\
 3 & 6 & 9
 \end{pmatrix} \]
+\end{definition}
 
-\subsubsection*{Matrice Anti-simmetrica}
+\begin{definition}{Matrice Anti-simmetrica}{matrice_anti_simmetrica}
 Una matrice quadrata si dice anti-simmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$. Questo implica che gli elementi sulla diagonale principale sono nulli ($a_{ii} = 0$).
 \paragraph{Notazione:}
 \[ A = \begin{pmatrix}
@@ -279,5 +364,6 @@ Una matrice quadrata si dice anti-simmetrica (o emisimmetrica) se è uguale all'
 -2 & 0 & 6 \\
 3 & -6 & 0
 \end{pmatrix} \]
+\end{definition}
 
 \end{document}
