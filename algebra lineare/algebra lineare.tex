@@ -20,6 +20,22 @@
 }
 {def} % This is a prefix for the label, so you can reference it like \ref{def:vector_space}
 
+\newtcbtheorem{theorem}{Teorema} % {box name}{display name}
+{
+    colback=blue!10!white,
+    colframe=blue!80!black,
+    fonttitle=\bfseries
+}
+{thm}
+
+\newtcbtheorem{exercise}{Esercizio} % {box name}{display name}
+{
+    colback=green!10!white,
+    colframe=green!80!black,
+    fonttitle=\bfseries
+}
+{exc}
+
 \title{Algebra Lineare}
 \author{Federico Veronesi}
 
@@ -56,7 +72,7 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \subsection{Sottospazi Vettoriali}
 
 \begin{definition}{Sottospazio Vettoriale}{sottospazio_vettoriale}
-    Un sottospazio vettoriale è uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} $W$ incluso in uno spazio vettoriale $V$. Ogni operazione fra vettori di $W$ ritorna un vettore incluso in $W$. Ogni sottospazio vettoriale include l'elemento neutro dello spazio vettoriale.
+    Un sottospazio vettoriale è uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} $W$ incluso in uno spazio vettoriale $V$. Moltiplicazione scalare di un vettore in $W$ e somma fra vettori di $W$ sono operazioni che ritornano un vettore incluso in $W$. Ne consegue che ogni sottospazio vettoriale include l'elemento neutro dello spazio vettoriale.
 \end{definition}
 
 \subsection{Combinazioni Lineari}
@@ -103,8 +119,49 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \end{definition}
 
 \begin{definition}{Base}{base}
-    Ognuna delle basi di un insieme di \hyperref[def:vettore]{vettori} è un suo sottoinsieme di vettori \hyperref[def:dipendenza_lineare]{linearmente indipendenti} e la cui combinazione lineare genera l'insieme di partenza stesso.
+    Ognuna delle basi di un insieme di \hyperref[def:vettore]{vettori} è un suo sottoinsieme di vettori \hyperref[def:dipendenza_lineare]{linearmente indipendenti} e la cui combinazione lineare genera l'insieme di partenza stesso
+
+    "Da una base, con un vettore di coefficienti, posso ricavare qualsiasi vettore"
 \end{definition}
+
+\begin{exercise}{Basi}{}
+    Dalla base $(\begin{pmatrix}
+            1 \\
+            2 \\
+            3
+            \end{pmatrix}, \begin{pmatrix}
+            0 \\
+            1 \\
+            4
+            \end{pmatrix}, \begin{pmatrix}
+            0 \\
+            0 \\
+            7
+            \end{pmatrix})$ o da un'altra comunque simile inventata da te, con gli zero nei vettori non sostutuiti con numeri diversi da zero, ricava $\begin{pmatrix}
+            4 \\
+            6 \\
+            9
+            \end{pmatrix}$
+\end{exercise}
+
+\begin{exercise}{Basi}{}
+    Dimostra che
+    $(\begin{pmatrix}
+        1 \\
+        1 
+    \end{pmatrix}, \begin{pmatrix}
+        2 \\
+        1 
+    \end{pmatrix})$ è una base di $\mathbb(R)^2$
+\end{exercise}
+
+\begin{exercise}{Teorema Della Dimensione}{dimensione}
+    Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori, pari all'ordine dello spazio vettoriale.
+\end{exercise}
+
+\begin{theorem}{Teorema \dots}{}
+    \[SPAN(v_1, v_2, v_3) = SPAN(v_1, v_2, v_3 + SPAN(v_1, v_2))\]  
+\end{theorem}
 
 \section{Matrici}
 
