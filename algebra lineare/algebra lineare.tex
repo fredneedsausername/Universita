@@ -28,14 +28,6 @@
 }
 {thm}
 
-\newtcbtheorem{exercise}{Esercizio} % {box name}{display name}
-{
-    colback=green!10!white,
-    colframe=green!80!black,
-    fonttitle=\bfseries
-}
-{exc}
-
 \title{Algebra Lineare}
 \author{Federico Veronesi}
 
@@ -50,346 +42,172 @@
 \section{Vettori}
 
 \begin{definition}{Vettore}{vettore}
-    Un vettore di campo $\mathbb{K}$ e dimensione $n$ è un insieme di elementi $a_1, a_2, \dots , a_n$, ciascuno di campo $\mathbb{K}$. In notazione: $\begin{pmatrix} x1 \\ \vdots \\ x_n \end{pmatrix}$ come ad esempio $\begin{pmatrix} 2 \\ -3.5 \\ \pi \end{pmatrix}$ di dimensione $3$ e campo $\mathbb{R}$
+    Un vettore di dimensione $n$ su un campo $\mathbb{K}$ è una $n$-upla ordinata di elementi $x_1, x_2, \dots, x_n$ appartenenti a $\mathbb{K}$. Si rappresenta comunemente come un vettore colonna:
+    \[ \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \]
+    Ad esempio, $\begin{pmatrix} 2 \\ -3.5 \\ \pi \end{pmatrix}$ è un vettore di dimensione $3$ sul campo $\mathbb{R}$.
 \end{definition}
 
 \begin{definition}{Spazio Vettoriale}{spazio_vettoriale}
-    Uno \textbf{spazio vettoriale} su un campo $\mathbb{K}$ è un insieme di \hyperref[def:vettore]{vettori} $V$ che definisce due operazioni:
+    Uno \textbf{spazio vettoriale} su un campo $\mathbb{K}$ è un insieme non vuoto $V$ di \hyperref[def:vettore]{vettori}, su cui sono definite due operazioni:
     \begin{enumerate}
-        \item Addizione fra vettori: $V + V \to V$
-        \item Moltiplicazione scalare: $\mathbb{K} \times V \to V$
+        \item \textbf{Addizione fra vettori:} $V \times V \to V$, che associa a due vettori $u, v \in V$ un terzo vettore $u+v \in V$.
+        \item \textbf{Moltiplicazione per scalare:} $\mathbb{K} \times V \to V$, che associa a uno scalare $\lambda \in \mathbb{K}$ e un vettore $v \in V$ un altro vettore $\lambda v \in V$.
     \end{enumerate}
+    Queste operazioni devono soddisfare determinate proprietà (associatività, commutatività, esistenza dell'elemento neutro e dell'inverso, distributività).
 \end{definition}
 
 Alcuni esempi di spazi vettoriali sono i seguenti:
 \begin{itemize}
-    \item $\mathbb{R} [x]$ L'insieme dei polinomi
-    \item $\mathbb{R} [x]^{\le n}$ L'insieme dei polinomi di grado $\le n$
-    \item $C(\mathbb{R}, \mathbb{R})$ Le funzioni continue da $\mathbb{R}$ in $\mathbb{R}$
-    \item $M(m, n, \mathbb{K})$ L'insieme delle matrici $m \times n$ a coefficiente di campo $\mathbb{K}$
+    \item $\mathbb{R}[x]$: L'insieme di tutti i polinomi a coefficienti reali.
+    \item $\mathbb{R}[x]_{\le n}$: L'insieme dei polinomi di grado al più $n$.
+    \item $C(\mathbb{R}, \mathbb{R})$: L'insieme delle funzioni continue da $\mathbb{R}$ in $\mathbb{R}$.
+    \item $M(m, n, \mathbb{K})$: L'insieme delle matrici $m \times n$ a coefficienti nel campo $\mathbb{K}$.
 \end{itemize}
 
 \subsection{Sottospazi Vettoriali}
 
 \begin{definition}{Sottospazio Vettoriale}{sottospazio_vettoriale}
-    Un sottospazio vettoriale è uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} $W$ incluso in uno spazio vettoriale $V$. Moltiplicazione scalare di un vettore in $W$ e somma fra vettori di $W$ sono operazioni che ritornano un vettore incluso in $W$. Ne consegue che ogni sottospazio vettoriale include l'elemento neutro dello spazio vettoriale.
+    Un sottoinsieme non vuoto $W \subseteq V$ è un sottospazio vettoriale di $V$ se $W$ è a sua volta uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} rispetto alle operazioni definite in $V$. Ciò è vero se e solo se $W$ è chiuso rispetto alle due operazioni:
+    \begin{itemize}
+        \item $\forall w_1, w_2 \in W \implies w_1 + w_2 \in W$
+        \item $\forall \lambda \in \mathbb{K}, \forall w \in W \implies \lambda w \in W$
+    \end{itemize}
+    Ne consegue che ogni sottospazio vettoriale deve contenere il vettore nullo.
 \end{definition}
 
 \subsection{Combinazioni Lineari}
 
 \begin{definition}{Combinazione Lineare}{combinazione_lineare}
-    \begin{itemize}
-        \item La combinazione lineare è il prodotto di un \hyperref[def:vettore]{vettore} per uno scalare diverso da zero.
-        \item Le combinazioni lineari di un vettore sono l'insieme di tutti i vettori risultanti dal prodotto di quel vettore e uno scalare $\lambda$.
-        \item Le combinazioni lineari di più vettori insieme sono l'insieme di tutte le somme vettoriali di tutte le combinazioni di combinazioni lineari di ciascuno dei vettori. In notazione: \it{guardare definizione di \hyperref[def:funzione_span]{SPAN}}
-    \end{itemize}
+    Dati $k$ \hyperref[def:vettore]{vettori} $v_1, v_2, \dots, v_k$ di uno spazio vettoriale $V$ e $k$ scalari $\lambda_1, \lambda_2, \dots, \lambda_k$ del campo $\mathbb{K}$, si definisce \textbf{combinazione lineare} il vettore $v$ ottenuto come:
+    \[ v = \lambda_1 v_1 + \lambda_2 v_2 + \dots + \lambda_k v_k \]
+    L'insieme di tutte le possibili combinazioni lineari di un gruppo di vettori è definito \hyperref[def:funzione_span]{SPAN}.
 \end{definition}
 
-\begin{definition}{Funzione SPAN}{funzione_span}
-    La funzione SPAN prende in ingresso un insieme di \hyperref[def:vettore]{vettori} e ritorna l'insieme delle loro combinazioni lineari.
+\begin{definition}{Funzione SPAN (o Sottospazio Generato)}{funzione_span}
+    La funzione SPAN (o \textit{chiusura lineare}) accetta un insieme di \hyperref[def:vettore]{vettori} $S = \{v_1, \dots, v_k\}$ e restituisce il sottospazio vettoriale $W$ contenente tutte le loro possibili combinazioni lineari. Tale sottospazio è detto "sottospazio generato da $S$".
     
-    In notazione: \begin{itemize}
-        \item \[SPAN(\begin{pmatrix}
-            x_1 \\
-            \vdots \\
-            x_n
-            \end{pmatrix}) = \{\begin{pmatrix}
-            \lambda x_1 \\
-            \vdots \\
-            \lambda x_n
-            \end{pmatrix} : \lambda \in \mathbb{R}\}\]
-        \item \[SPAN(\begin{pmatrix}
-            1 \\
-            0
-            \end{pmatrix}, \begin{pmatrix}
-            0 \\
-            1
-            \end{pmatrix}) = \{ \lambda\begin{pmatrix}
-            1 \\
-            0
-            \end{pmatrix} + r\begin{pmatrix}
-            0 \\
-            1
-            \end{pmatrix} : \lambda, r \in \mathbb{R}\}\]
-    \end{itemize}
-
-    Si possono permutare i vettori all'interno dell'insieme che viene passato a SPAN, visto che la combinazione lineare permette permutazione.
+    In notazione:
+    \[ \text{SPAN}(v_1, \dots, v_k) = \{ \lambda_1 v_1 + \dots + \lambda_k v_k \mid \lambda_1, \dots, \lambda_k \in \mathbb{K} \} \]
+    \textbf{Esempio con due vettori in $\mathbb{R}^2$:}
+    \[ \text{SPAN}\left(\begin{pmatrix} 1 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \end{pmatrix}\right) = \left\{ \lambda\begin{pmatrix} 1 \\ 0 \end{pmatrix} + \mu\begin{pmatrix} 0 \\ 1 \end{pmatrix} : \lambda, \mu \in \mathbb{R}\right\} = \mathbb{R}^2 \]
 \end{definition}
 
-\begin{definition}{Dipendenza Lineare}{dipendenza_lineare}
-    Dei \hyperref[def:vettore]{vettori} sono linearmente indipendenti se nessuno di loro può essere espresso come \hyperref[def:combinazione_lineare]{combinazione lineare} degli altri.
+\begin{definition}{Dipendenza e Indipendenza Lineare}{dipendenza_lineare}
+    Un insieme di vettori $\{v_1, \dots, v_k\}$ si dice \textbf{linearmente indipendente} se l'unica loro combinazione lineare che risulta nel vettore nullo è quella con tutti i coefficienti nulli:
+    \[ \lambda_1 v_1 + \dots + \lambda_k v_k = \mathbf{0} \iff \lambda_1 = \lambda_2 = \dots = \lambda_k = 0 \]
+    In caso contrario, i vettori si dicono \textbf{linearmente dipendenti}. Questo equivale a dire che almeno uno di essi può essere espresso come \hyperref[def:combinazione_lineare]{combinazione lineare} degli altri.
 \end{definition}
 
 \begin{definition}{Base}{base}
-    Ognuna delle basi di un insieme di \hyperref[def:vettore]{vettori} è un suo sottoinsieme di vettori \hyperref[def:dipendenza_lineare]{linearmente indipendenti} e la cui combinazione lineare genera l'insieme di partenza stesso
-
-    "Da una base, con un vettore di coefficienti, posso ricavare qualsiasi vettore"
-\end{definition}
-
-\begin{definition}{Cardinalità}{cardinalita}
-    Il numero di vettori di uno \hyperref[def:spazio_vettoriale]{spazio vettoriale}.
+    Una \textbf{base} di uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} $V$ è un insieme di \hyperref[def:vettore]{vettori} $\{v_1, \dots, v_n\}$ che soddisfa due condizioni:
+    \begin{enumerate}
+        \item I vettori sono \hyperref[def:dipendenza_lineare]{linearmente indipendenti}.
+        \item I vettori generano l'intero spazio, ovvero $\text{SPAN}(v_1, \dots, v_n) = V$.
+    \end{enumerate}
+    Ogni vettore dello spazio può essere scritto in modo \textbf{unico} come combinazione lineare dei vettori di una base.
 \end{definition}
 
 \begin{definition}{Dimensione di Uno Spazio Vettoriale}{dimensione_spazio_vettoriale}
-    La \hyperref[def:cardinalita]{cardinalità} di una qualunque base dello spazio vettoriale analizzato.
+    La \textbf{dimensione} di uno spazio vettoriale è il numero di vettori che compongono una sua qualsiasi \hyperref[def:base]{base}.
 \end{definition}
 
-\begin{exercise}{Basi}{}
-    Dalla base $(\begin{pmatrix}
-            1 \\
-            2 \\
-            3
-            \end{pmatrix}, \begin{pmatrix}
-            0 \\
-            1 \\
-            4
-            \end{pmatrix}, \begin{pmatrix}
-            0 \\
-            0 \\
-            7
-            \end{pmatrix})$ o da un'altra comunque simile inventata da te, con gli zero nei vettori non sostutuiti con numeri diversi da zero, ricava $\begin{pmatrix}
-            4 \\
-            6 \\
-            9
-            \end{pmatrix}$
-\end{exercise}
-
-\begin{exercise}{Basi}{}
-    Dimostra che
-    $(\begin{pmatrix}
-        1 \\
-        1 
-    \end{pmatrix}, \begin{pmatrix}
-        2 \\
-        1 
-    \end{pmatrix})$ è una base di $\mathbb(R)^2$
-\end{exercise}
-
 \begin{theorem}{Teorema Della Dimensione}{}
-    Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori, pari all'ordine dello spazio vettoriale.
+    Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori. Tale numero è la dimensione di $V$.
 \end{theorem}
 
-\begin{exercise}{Dimensione}{}
-    Determinare la dimensione del sottospazio di $\mathbb{R}^4$ generato dai vettori \[
-    \{
-        \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix},
-        \begin{pmatrix} 1 \\ 0 \\ -1 \\ 0 \end{pmatrix},
-        \begin{pmatrix} 2 \\ 0 \\ 2 \\ 0 \end{pmatrix}
-    \}
-    \]
-    
-    Ripetere l'esercizio a piacere con vettori a piacere.
-\end{exercise}
+\subsection{Estrarre una Base da un Insieme di Vettori}
 
-\subsection{Trovare la Base di Vettori}
+Per trovare una base del sottospazio generato da un insieme di vettori $\{v_1, \dots, v_k\}$, si può utilizzare l'algoritmo di eliminazione di Gauss. L'obiettivo è eliminare i vettori linearmente dipendenti (ridondanti).
 
-La combinazione lineare è invertibile perché:
-\begin{itemize}
-    \item A ogni vettore che è stato moltiplicato per uno scalare \lambda si può moltiplicare il reciproco di quello scalare $\lambda ^{-1}$ e tornare al vettore di partenza;
-    \item A ogni vettore $v_1$ a cui è stato sommato un vettore $v_2$ si può sommare un vettore $v_2$ moltiplicato per uno scalare $-1$, cioè $-v_2$, per tornare al vettore di partenza.
-\end{itemize}
+\paragraph{Algoritmo Operativo:}
+\begin{enumerate}
+    \item Si dispongono i vettori come colonne di una matrice $A$.
+    \item Si riduce la matrice a una forma a gradini (o "a scala") per colonne, utilizzando operazioni elementari di colonna (scambiare due colonne, moltiplicare una colonna per uno scalare non nullo, sommare a una colonna un multiplo di un'altra).
+    \item Le colonne non nulle della matrice ridotta formano una base per il sottospazio generato. Il loro numero corrisponde alla dimensione del sottospazio.
+\end{enumerate}
 
-Essendo \hyperref[def:funzione_span]{$SPAN$} invertibile, allora è possibile enunciare quanto segue. Presa \hyperref[def:funzione_span]{$SPAN$} come la funzione che parte da una base $e$ per arrivare a un insieme di vettori $V$, ed essendo \hyperref[def:funzione_span]{$SPAN$} invertibile, allora \hyperref[def:funzione_span]{$SPAN$} è anche la funzione che parte da $V$ per arrivare ad $e$. Quindi, preso un insieme di vettori, è possibile, grazie a \hyperref[def:funzione_span]{$SPAN$}, ricavare una delle basi che potrebbe generarlo.
-
-Facciamo un esempio operativo di come applicare un algoritmo per ricavare una base di un insieme di vettori.
-
-\[SPAN(\begin{pmatrix}
-    1 \\
-    0 \\
-    1
-\end{pmatrix}, \begin{pmatrix}
-    2 \\
-    1 \\
-    1
-\end{pmatrix}, \begin{pmatrix}
-    -1 \\
-    1 \\
-    -1
-\end{pmatrix})\]
-
-Mettiamolo in forma di matrice:
-
-\[\begin{pmatrix}
+\paragraph{Esempio:} Trovare una base per il sottospazio generato da:
+\[ S = \left\{ \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix}, \begin{pmatrix} -1 \\ 1 \\ -2 \end{pmatrix} \right\} \]
+Costruiamo la matrice e applichiamo le operazioni di colonna:
+\[
+A = \begin{pmatrix}
 1 & 2 & -1 \\
 0 & 1 & 1 \\
-1 & 1 & -1
-\end{pmatrix}\]
-
-Moltiplichiamo per $-2$ temporaneamente il primo vettore, sommiamolo al secondo vettore, e moltiplichiamo per $\frac{1}{2}$ il primo vettore per farlo tornare al suo stato iniziale (questi passaggi intermedi che modificano temporaneamente un vettore ai fini di una operazione sono frequenti, infatti non verranno spiegati in futuro):
-
-\[\begin{pmatrix}
-1 & 0 & -1 \\
+1 & 1 & -2
+\end{pmatrix}
+\xrightarrow{\substack{C_2 \to C_2 - 2C_1 \\ C_3 \to C_3 + C_1}}
+\begin{pmatrix}
+1 & 0 & 0 \\
 0 & 1 & 1 \\
 1 & -1 & -1
-\end{pmatrix}\]
-
-Sommiamo al terzo vettore il primo:
-
-\[\begin{pmatrix}
-1 & 0 & 0 \\
-0 & 1 & 1 \\
-1 & -1 & 0
-\end{pmatrix}\]
-
-Sottraiamo (richiesto passaggio intermedio di moltiplicazione per $-1$, omesso) al secondo il terzo.
-
-\[\begin{pmatrix}
-1 & 0 & 0 \\
-0 & 0 & 1 \\
-1 & -1 & 0
-\end{pmatrix}\]
-
-Permutiamo (operazione di \hyperref[def:funzione_span]{$SPAN$} concessa) per avere uno schema a scalini
-
-\[\begin{pmatrix}
+\end{pmatrix}
+\xrightarrow{C_3 \to C_3 - C_2}
+\begin{pmatrix}
 1 & 0 & 0 \\
 0 & 1 & 0 \\
-1 & 0 & -1
-\end{pmatrix}\]
-
-Come si può notare adesso si ha una \hyperref[def:matrice_triangolare_inferiore]{matrice triangolare inferiore}, e quindi si è sicuri che i vettori siano fra loro linearmente indipendenti, che è l'altra condizione necessaria perché la matrice ricavata sia una base. Questa si dice anche matrice a scalino, perché se gli zero fossero aria e i numeri il materiale di cui è fatta la scala, si avrebbe una scala. Non è condizione necessaria che la matrice ottenuta sia una matrice triangolare inferiore, l'importante è che sia a scalino
-
-La dimostrazione che una matrice così fatta sia composta da vettori linearmente indipendenti la lasciamo al lettore come esercizio. (E' una battuta, non ci provare nemmeno a dimostrarlo)
-
-\begin{exercise}{Ricavare una Base di Matrici in $\mathbb{R}^n$}{}
-    Esecizi a piacere su matrici a piacere. Si ricorda che si cerca, idealmente, la base canonica, quindi partire con un numero di vettori pari al loro numero di elementi pari alla \hyperref[def:dimensione_spazio_vettoriale]{dimensione} di $\mathbb{R}$ utilizzata.
-\end{exercise}
+1 & -1 & 0
+\end{pmatrix}
+\]
+La terza colonna è diventata nulla, indicando che il terzo vettore era linearmente dipendente dai primi due. Le prime due colonne della matrice ridotta (o, meglio, i vettori originali corrispondenti) sono linearmente indipendenti e formano una base per il sottospazio.
+\[ \text{Base} = \left\{ \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix} \right\} \]
+La forma a scalini per colonne garantisce l'indipendenza lineare perché ogni vettore "pivot" ha un elemento non nullo in una posizione dove i vettori precedenti hanno zero.
 
 \section{Matrici}
 
 \begin{definition}{Matrice}{matrice}
-    Una matrice è un \hyperref[def:vettore]{vettore} bidimensionale $m \times n$. In notazione: $\begin{pmatrix}
+    Una matrice $m \times n$ (si legge "m per n") su un campo $\mathbb{K}$ è una tabella rettangolare di elementi di $\mathbb{K}$ disposti in $m$ righe e $n$ colonne.
+    \[ \begin{pmatrix}
     a_{11} & a_{12} & \cdots & a_{1n} \\
     a_{21} & a_{22} & \cdots & a_{2n} \\
     \vdots & \vdots & \ddots & \vdots \\
     a_{m1} & a_{m2} & \cdots & a_{mn}
-    \end{pmatrix}$ Esempio di matrice di campo $\mathbb{N}$ e di dimensione $2 \times 3$: $\begin{pmatrix}
-    1 & 4 \\
-    3 & 7 \\
-    2 & 13
-    \end{pmatrix}$
+    \end{pmatrix} \]
+    Esempio di matrice $3 \times 2$ sul campo $\mathbb{N}$: $\begin{pmatrix} 1 & 4 \\ 3 & 7 \\ 2 & 13 \end{pmatrix}$
 \end{definition}
 
 \begin{definition}{Traccia}{traccia}
-    La traccia di una \hyperref[def:matrice]{matrice} è la somma degli elementi sulla sua diagonale principale. Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è 13.
+    La traccia di una \hyperref[def:matrice_quadrata]{matrice quadrata} è la somma degli elementi sulla sua diagonale principale. Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è $6+7=13$.
 \end{definition}
 
 \subsection{Tipologie di Matrici}
 
 \begin{definition}{Matrice Quadrata}{matrice_quadrata}
 Una matrice si dice quadrata se il numero di righe è uguale al numero di colonne ($m=n$).
-\paragraph{Notazione:}
-\[ A = \begin{pmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{21} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{n1} & a_{n2} & \cdots & a_{nn}
-\end{pmatrix} \]
-\paragraph{Esempio:} Matrice quadrata $3 \times 3$:
-\[ \begin{pmatrix}
-1 & 2 & 3 \\
-4 & 5 & 6 \\
-7 & 8 & 9
-\end{pmatrix} \]
 \end{definition}
 
 \begin{definition}{Matrice Triangolare Superiore}{matrice_triangolare_superiore}
 Una matrice quadrata si dice triangolare superiore se tutti gli elementi al di sotto della diagonale principale sono nulli ($a_{ij} = 0$ per $i>j$).
-\paragraph{Notazione:}
-\[ U = \begin{pmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-0 & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 0 & \cdots & a_{nn}
-\end{pmatrix} \]
-\paragraph{Esempio:}
-\[ \begin{pmatrix}
-1 & 2 & 3 \\
-0 & 5 & 6 \\
-0 & 0 & 9
-\end{pmatrix} \]
 \end{definition}
 
 \begin{definition}{Matrice Triangolare Inferiore}{matrice_triangolare_inferiore}
 Una matrice quadrata si dice triangolare inferiore se tutti gli elementi al di sopra della diagonale principale sono nulli ($a_{ij} = 0$ per $i<j$).
-\paragraph{Notazione:}
-\[ L = \begin{pmatrix}
-a_{11} & 0 & \cdots & 0 \\
-a_{21} & a_{22} & \cdots & 0 \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{n1} & a_{n2} & \cdots & a_{nn}
-\end{pmatrix} \]
-\paragraph{Esempio:}
-\[ \begin{pmatrix}
-1 & 0 & 0 \\
-4 & 5 & 0 \\
-7 & 8 & 9
-\end{pmatrix} \]
 \end{definition}
 
 \begin{definition}{Matrice Diagonale}{matrice_diagonale}
-Una matrice quadrata si dice diagonale se tutti gli elementi al di fuori della diagonale principale sono nulli ($a_{ij} = 0$ per $i \neq j$). È sia triangolare superiore che inferiore.
-\paragraph{Notazione:}
-\[ D = \begin{pmatrix}
-a_{11} & 0 & \cdots & 0 \\
-0 & a_{22} & \cdots & 0 \\
-\vdots & \vdots & \ddots & \vdots \\
-0 & 0 & \cdots & a_{nn}
-\end{pmatrix} \]
-\paragraph{Esempio:}
-\[ \begin{pmatrix}
-1 & 0 & 0 \\
-0 & 5 & 0 \\
-0 & 0 & 9
-\end{pmatrix} \]
+Una matrice quadrata si dice diagonale se tutti gli elementi al di fuori della diagonale principale sono nulli ($a_{ij} = 0$ per $i \neq j$).
 \end{definition}
 
 \begin{definition}{Matrice Simmetrica}{matrice_simmetrica}
-Una matrice quadrata si dice simmetrica se è uguale alla sua trasposta ($A = A^T$), ovvero se $a_{ij} = a_{ji}$ per ogni $i,j$.
-\paragraph{Notazione:}
-\[ A = \begin{pmatrix}
-a_{11} & a_{12} & \cdots & a_{1n} \\
-a_{12} & a_{22} & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
-a_{1n} & a_{2n} & \cdots & a_{nn}
-\end{pmatrix} \]
-\paragraph{Esempio:}
-\[ \begin{pmatrix}
-1 & 2 & 3 \\
-2 & 5 & 6 \\
-3 & 6 & 9
-\end{pmatrix} \]
+Una matrice quadrata $A$ si dice simmetrica se è uguale alla sua trasposta ($A = A^T$), ovvero se $a_{ij} = a_{ji}$ per ogni $i,j$.
 \end{definition}
 
-\begin{definition}{Matrice Anti-simmetrica}{matrice_anti_simmetrica}
-Una matrice quadrata si dice anti-simmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$. Questo implica che gli elementi sulla diagonale principale sono nulli ($a_{ii} = 0$).
-\paragraph{Notazione:}
-\[ A = \begin{pmatrix}
-0 & a_{12} & \cdots & a_{1n} \\
--a_{12} & 0 & \cdots & a_{2n} \\
-\vdots & \vdots & \ddots & \vdots \\
--a_{1n} & -a_{2n} & \cdots & 0
-\end{pmatrix} \]
-\paragraph{Esempio:}
-\[ \begin{pmatrix}
-0 & 2 & -3 \\
--2 & 0 & 6 \\
-3 & -6 & 0
-\end{pmatrix} \]
+\begin{definition}{Matrice Antisimmetrica}{matrice_anti_simmetrica}
+Una matrice quadrata $A$ si dice antisimmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$. Questo implica che gli elementi sulla diagonale principale sono nulli.
 \end{definition}
 
 \subsection{Isomorfismi}
 
 \begin{definition}{Isomorfismo}{isomorfismo}
-    Un isomorfismo è una funzione bigettiva tra due \hyperref[def:spazio_vettoriale]{spazi vettoriali} $V$ e $W$ definiti sullo stesso campo di scalari e della stessa \hyperref[def:dimensione_spazio_vettoriale]{dimensione}.
+    Un isomorfismo è un'applicazione lineare e biiettiva tra due \hyperref[def:spazio_vettoriale]{spazi vettoriali} $V$ e $W$ (definiti sullo stesso campo). Due spazi vettoriali sono isomorfi se e solo se hanno la stessa \hyperref[def:dimensione_spazio_vettoriale]{dimensione}.
 \end{definition}
 
-E' possibile fare un isomorfismo da $\mathbb{R}[x]^{\le{n}} a \mathbb{R}^{n+1}$ rendendo i coefficienti un vettore. \[a + bx + cx^2 + \dots + \omega x^n = \begin{pmatrix}
-    a \\
-    b \\
-    c \\
+Un esempio classico di isomorfismo è quello tra lo spazio dei polinomi $\mathbb{R}[x]_{\le n}$ e lo spazio vettoriale $\mathbb{R}^{n+1}$. L'isomorfismo associa a ogni polinomio il vettore dei suoi coefficienti:
+\[ a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n \quad \longleftrightarrow \quad \begin{pmatrix}
+    a_0 \\
+    a_1 \\
+    a_2 \\
     \vdots \\
-    \omega
-\end{pmatrix}\]
+    a_n
+\end{pmatrix} \]
 
 \end{document}
