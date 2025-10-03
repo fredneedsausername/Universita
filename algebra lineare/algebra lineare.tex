@@ -127,11 +127,11 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \end{definition}
 
 \begin{definition}{Cardinalità}{cardinalita}
-    Il numero di elementi di una base.
+    Il numero di vettori di uno \hyperref[def:spazio_vettoriale]{spazio vettoriale}.
 \end{definition}
 
 \begin{definition}{Dimensione di Uno Spazio Vettoriale}{dimensione_spazio_vettoriale}
-    La cardinalità di una qualunque base dello spazio vettoriale analizzato.
+    La \hyperref[def:cardinalita]{cardinalità} di una qualunque base dello spazio vettoriale analizzato.
 \end{definition}
 
 \begin{exercise}{Basi}{}
@@ -165,8 +165,20 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
     \end{pmatrix})$ è una base di $\mathbb(R)^2$
 \end{exercise}
 
-\begin{exercise}{Teorema Della Dimensione}{dimensione}
+\begin{theorem}{Teorema Della Dimensione}{}
     Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori, pari all'ordine dello spazio vettoriale.
+\end{theorem}
+
+\begin{exercise}{Dimensione}{}
+    Determinare la dimensione del sottospazio di $\mathbb{R}^4$ generato dai vettori \[
+    \{
+        \begin{pmatrix} 1 \\ 0 \\ 2 \\ 0 \end{pmatrix},
+        \begin{pmatrix} 1 \\ 0 \\ -1 \\ 0 \end{pmatrix},
+        \begin{pmatrix} 2 \\ 0 \\ 2 \\ 0 \end{pmatrix}
+    \}
+    \]
+    
+    Ripetere l'esercizio a piacere con vettori a piacere.
 \end{exercise}
 
 \subsection{Trovare la Base di Vettori}
@@ -365,5 +377,19 @@ Una matrice quadrata si dice anti-simmetrica (o emisimmetrica) se è uguale all'
 3 & -6 & 0
 \end{pmatrix} \]
 \end{definition}
+
+\subsection{Isomorfismi}
+
+\begin{definition}{Isomorfismo}{isomorfismo}
+    Un isomorfismo è una funzione bigettiva tra due \hyperref[def:spazio_vettoriale]{spazi vettoriali} $V$ e $W$ definiti sullo stesso campo di scalari e della stessa \hyperref[def:dimensione_spazio_vettoriale]{dimensione}.
+\end{definition}
+
+E' possibile fare un isomorfismo da $\mathbb{R}[x]^{\le{n}} a \mathbb{R}^{n+1}$ rendendo i coefficienti un vettore. \[a + bx + cx^2 + \dots + \omega x^n = \begin{pmatrix}
+    a \\
+    b \\
+    c \\
+    \vdots \\
+    \omega
+\end{pmatrix}\]
 
 \end{document}
