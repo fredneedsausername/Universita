@@ -28,6 +28,14 @@
 }
 {thm}
 
+% Box for explanations, inspired by the analysis document
+\newtcbtheorem{explanation}{Spiegazione}{
+    colback=green!10!white,
+    colframe=green!60!black,
+    fonttitle=\bfseries
+}
+{expl}
+
 \title{Algebra Lineare}
 \author{Federico Veronesi}
 
@@ -42,7 +50,8 @@
 \section{Vettori}
 
 \begin{definition}{Vettore}{vettore}
-    Un vettore di dimensione $n$ su un campo $\mathbb{K}$ è una $n$-upla ordinata di elementi $x_1, x_2, \dots, x_n$ appartenenti a $\mathbb{K}$. Si rappresenta comunemente come un vettore colonna:
+    Un vettore di dimensione $n$ su un campo $\mathbb{K}$ è una $n$-upla ordinata di elementi $x_1, x_2, \dots, x_n$ appartenenti a $\mathbb{K}$.
+    Si rappresenta comunemente come un vettore colonna:
     \[ \begin{pmatrix} x_1 \\ \vdots \\ x_n \end{pmatrix} \]
     Ad esempio, $\begin{pmatrix} 2 \\ -3.5 \\ \pi \end{pmatrix}$ è un vettore di dimensione $3$ sul campo $\mathbb{R}$.
 \end{definition}
@@ -67,13 +76,49 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \subsection{Sottospazi Vettoriali}
 
 \begin{definition}{Sottospazio Vettoriale}{sottospazio_vettoriale}
-    Un sottoinsieme non vuoto $W \subseteq V$ è un sottospazio vettoriale di $V$ se $W$ è a sua volta uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} rispetto alle operazioni definite in $V$. Ciò è vero se e solo se $W$ è chiuso rispetto alle due operazioni:
+    Un sottoinsieme non vuoto $W \subseteq V$ è un sottospazio vettoriale di $V$ se $W$ è a sua volta uno \hyperref[def:spazio_vettoriale]{spazio vettoriale} rispetto alle operazioni definite in $V$.
+    Ciò è vero se e solo se $W$ è chiuso rispetto alle due operazioni:
     \begin{itemize}
         \item $\forall w_1, w_2 \in W \implies w_1 + w_2 \in W$
         \item $\forall \lambda \in \mathbb{K}, \forall w \in W \implies \lambda w \in W$
     \end{itemize}
     Ne consegue che ogni sottospazio vettoriale deve contenere il vettore nullo.
 \end{definition}
+
+\begin{theorem}{Intersezione di Sottospazi}{}
+    Se $W_1$ e $W_2$ sono due sottospazi vettoriali di $V$, allora anche la loro intersezione $W_1 \cap W_2$ è un sottospazio vettoriale di $V$.
+\end{theorem}
+
+\begin{explanation}{Cosa significa il teorema?}{}
+    Questo teorema ci assicura che prendendo due sottospazi (ad esempio due piani passanti per l'origine in $\mathbb{R}^3$) e considerando gli elementi che hanno in comune (la loro intersezione, che in questo caso è una retta passante per l'origine), otteniamo un nuovo insieme che è ancora un sottospazio.
+    \textbf{Dimostrazione intuitiva:}
+    \begin{itemize}
+        \item \textbf{Contiene l'origine?} Sì, perché ogni sottospazio deve contenere il vettore nullo, quindi il vettore nullo si trova sia in $W_1$ sia in $W_2$, e di conseguenza anche nella loro intersezione.
+        \item \textbf{È chiuso rispetto alla somma?} Se prendiamo due vettori $u$ e $v$ dall'intersezione, significa che entrambi appartengono sia a $W_1$ che a $W_2$. Poiché $W_1$ e $W_2$ sono sottospazi, la loro somma $u+v$ deve trovarsi in $W_1$ e deve trovarsi anche in $W_2$. Ma se $u+v$ sta in entrambi, allora per definizione sta anche nell'intersezione.
+        \item \textbf{È chiuso rispetto al prodotto per scalare?} Similmente, se prendiamo un vettore $u$ dall'intersezione e uno scalare $\lambda$, $\lambda u$ deve appartenere a $W_1$ (perché $W_1$ è un sottospazio) e anche a $W_2$ (per lo stesso motivo). Di conseguenza, $\lambda u$ appartiene alla loro intersezione.
+    \end{itemize}
+    L'intersezione "eredita" le proprietà di chiusura da entrambi i sottospazi genitori.
+\end{explanation}
+
+\begin{theorem}{Sottospazi di $\mathbb{R}^2$}{}
+    Gli unici sottospazi vettoriali di $\mathbb{R}^2$ sono:
+    \begin{enumerate}
+        \item Il sottospazio nullo, contenente solo il vettore $\left\{ \begin{pmatrix} 0 \\ 0 \end{pmatrix} \right\}$.
+        \item Tutte le rette passanti per l'origine.
+        \item L'intero spazio $\mathbb{R}^2$.
+    \end{enumerate}
+\end{theorem}
+
+\begin{explanation}{Perché solo questi?}{}
+    Ogni sottospazio $W$ di $\mathbb{R}^2$ deve contenere il vettore nullo (l'origine).
+    Analizziamo le possibilità:
+    \begin{itemize}
+        \item \textbf{Caso 1: $W$ contiene solo il vettore nullo.} Questo è il sottospazio banale $\{\mathbf{0}\}$.
+        \item \textbf{Caso 2: $W$ contiene almeno un vettore non nullo $v$.} Se $W$ contiene $v$, per la proprietà di chiusura deve contenere anche tutti i suoi multipli $\lambda v$ per ogni scalare $\lambda \in \mathbb{R}$. L'insieme di tutti questi vettori $\{\lambda v \mid \lambda \in \mathbb{R}\}$ è esattamente una retta passante per l'origine. Se $W$ non contiene altri vettori al di fuori di questa retta, allora $W$ è una retta per l'origine.
+        \item \textbf{Caso 3: $W$ contiene un vettore $v$ e un altro vettore $w$ che non sta sulla retta generata da $v$.} Questo significa che $v$ e $w$ sono linearmente indipendenti. Ma due vettori linearmente indipendenti in $\mathbb{R}^2$ formano una base per l'intero spazio. Di conseguenza, lo SPAN di $v$ e $w$ è tutto $\mathbb{R}^2$, e quindi $W$ deve essere $\mathbb{R}^2$ stesso.
+    \end{itemize}
+    Non ci sono altre possibilità. Un sottospazio non può essere, ad esempio, una parabola o una circonferenza, perché queste figure non sono chiuse rispetto alla somma dei vettori o al prodotto per scalare.
+\end{explanation}
 
 \subsection{Combinazioni Lineari}
 
@@ -84,8 +129,8 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \end{definition}
 
 \begin{definition}{Funzione SPAN (o Sottospazio Generato)}{funzione_span}
-    La funzione SPAN (o \textit{chiusura lineare}) accetta un insieme di \hyperref[def:vettore]{vettori} $S = \{v_1, \dots, v_k\}$ e restituisce il sottospazio vettoriale $W$ contenente tutte le loro possibili combinazioni lineari. Tale sottospazio è detto "sottospazio generato da $S$".
-    
+    La funzione SPAN (o \textit{chiusura lineare}) accetta un insieme di \hyperref[def:vettore]{vettori} $S = \{v_1, \dots, v_k\}$ e restituisce il sottospazio vettoriale $W$ contenente tutte le loro possibili combinazioni lineari.
+    Tale sottospazio è detto "sottospazio generato da $S$".
     In notazione:
     \[ \text{SPAN}(v_1, \dots, v_k) = \{ \lambda_1 v_1 + \dots + \lambda_k v_k \mid \lambda_1, \dots, \lambda_k \in \mathbb{K} \} \]
     \textbf{Esempio con due vettori in $\mathbb{R}^2$:}
@@ -95,7 +140,8 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \begin{definition}{Dipendenza e Indipendenza Lineare}{dipendenza_lineare}
     Un insieme di vettori $\{v_1, \dots, v_k\}$ si dice \textbf{linearmente indipendente} se l'unica loro combinazione lineare che risulta nel vettore nullo è quella con tutti i coefficienti nulli:
     \[ \lambda_1 v_1 + \dots + \lambda_k v_k = \mathbf{0} \iff \lambda_1 = \lambda_2 = \dots = \lambda_k = 0 \]
-    In caso contrario, i vettori si dicono \textbf{linearmente dipendenti}. Questo equivale a dire che almeno uno di essi può essere espresso come \hyperref[def:combinazione_lineare]{combinazione lineare} degli altri.
+    In caso contrario, i vettori si dicono \textbf{linearmente dipendenti}.
+    Questo equivale a dire che almeno uno di essi può essere espresso come \hyperref[def:combinazione_lineare]{combinazione lineare} degli altri.
 \end{definition}
 
 \begin{definition}{Base}{base}
@@ -112,18 +158,21 @@ Alcuni esempi di spazi vettoriali sono i seguenti:
 \end{definition}
 
 \begin{theorem}{Teorema Della Dimensione}{}
-    Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori. Tale numero è la dimensione di $V$.
+    Se uno spazio vettoriale $V$ ammette una base finita, allora tutte le sue basi hanno lo stesso numero di vettori.
+    Tale numero è la dimensione di $V$.
 \end{theorem}
 
 \subsection{Estrarre una Base da un Insieme di Vettori}
 
-Per trovare una base del sottospazio generato da un insieme di vettori $\{v_1, \dots, v_k\}$, si può utilizzare l'algoritmo di eliminazione di Gauss. L'obiettivo è eliminare i vettori linearmente dipendenti (ridondanti).
+Per trovare una base del sottospazio generato da un insieme di vettori $\{v_1, \dots, v_k\}$, si può utilizzare l'algoritmo di eliminazione di Gauss.
+L'obiettivo è eliminare i vettori linearmente dipendenti (ridondanti).
 
 \paragraph{Algoritmo Operativo:}
 \begin{enumerate}
     \item Si dispongono i vettori come colonne di una matrice $A$.
     \item Si riduce la matrice a una forma a gradini (o "a scala") per colonne, utilizzando operazioni elementari di colonna (scambiare due colonne, moltiplicare una colonna per uno scalare non nullo, sommare a una colonna un multiplo di un'altra).
-    \item Le colonne non nulle della matrice ridotta formano una base per il sottospazio generato. Il loro numero corrisponde alla dimensione del sottospazio.
+    \item Le colonne non nulle della matrice ridotta formano una base per il sottospazio generato.
+    Il loro numero corrisponde alla dimensione del sottospazio.
 \end{enumerate}
 
 \paragraph{Esempio:} Trovare una base per il sottospazio generato da:
@@ -148,9 +197,55 @@ A = \begin{pmatrix}
 1 & -1 & 0
 \end{pmatrix}
 \]
-La terza colonna è diventata nulla, indicando che il terzo vettore era linearmente dipendente dai primi due. Le prime due colonne della matrice ridotta (o, meglio, i vettori originali corrispondenti) sono linearmente indipendenti e formano una base per il sottospazio.
+La terza colonna è diventata nulla, indicando che il terzo vettore era linearmente dipendente dai primi due.
+Le prime due colonne della matrice ridotta (o, meglio, i vettori originali corrispondenti) sono linearmente indipendenti e formano una base per il sottospazio.
 \[ \text{Base} = \left\{ \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \\ 1 \end{pmatrix} \right\} \]
 La forma a scalini per colonne garantisce l'indipendenza lineare perché ogni vettore "pivot" ha un elemento non nullo in una posizione dove i vettori precedenti hanno zero.
+
+\subsection{Completamento a una Base}
+
+Il \textbf{teorema del completamento a una base} afferma che, dato un insieme di vettori linearmente indipendenti in uno spazio vettoriale $V$ di dimensione finita $n$, è sempre possibile "aggiungere" altri vettori a questo insieme per formare una base completa di $V$.
+
+\paragraph{Algoritmo Operativo:}
+\begin{enumerate}
+    \item Si parte da un insieme di $k$ vettori linearmente indipendenti $\{v_1, \dots, v_k\}$.
+    \item Si accostano a questi i vettori di una base nota dello spazio, tipicamente la base canonica $\{e_1, \dots, e_n\}$.
+    \item Si costruisce una matrice $A$ mettendo in colonna prima i vettori $\{v_1, \dots, v_k\}$ e poi i vettori della base canonica:
+    \[ A = \begin{pmatrix} v_1 & \dots & v_k & e_1 & \dots & e_n \end{pmatrix} \]
+    \item Si applica l'algoritmo di eliminazione di Gauss per colonne per estrarre una base. I primi $k$ vettori saranno sicuramente scelti, poiché sono linearmente indipendenti. Ad essi si aggiungeranno $n-k$ vettori della base canonica.
+\end{enumerate}
+
+\paragraph{Esempio:} Completare a una base di $\mathbb{R}^3$ l'insieme di vettori:
+\[ S = \left\{ \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix} \right\} \]
+Costruiamo la matrice affiancando la base canonica di $\mathbb{R}^3$:
+\[
+A = \begin{pmatrix}
+1 & 1 & 0 & 0 \\
+2 & 0 & 1 & 0 \\
+1 & 0 & 0 & 1
+\end{pmatrix}
+\xrightarrow{\substack{C_2 \to C_2 - C_1}}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+2 & -2 & 1 & 0 \\
+1 & -1 & 0 & 1
+\end{pmatrix}
+\xrightarrow{\substack{C_3 \to C_3 + \frac{1}{2}C_2}}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+2 & -2 & 0 & 0 \\
+1 & -1 & -1/2 & 1
+\end{pmatrix}
+\xrightarrow{\substack{C_4 \to C_4 - 2C_3}}
+\begin{pmatrix}
+1 & 0 & 0 & 0 \\
+2 & -2 & 0 & 0 \\
+1 & -1 & -1/2 & 0
+\end{pmatrix}
+\]
+Le colonne non nulle della matrice ridotta sono le prime tre. Questo significa che i primi tre vettori della matrice originale formano una base.
+\[ \text{Base completata} = \left\{ \begin{pmatrix} 1 \\ 2 \\ 1 \end{pmatrix}, \begin{pmatrix} 1 \\ 0 \\ 0 \end{pmatrix}, \begin{pmatrix} 0 \\ 1 \\ 0 \end{pmatrix} \right\} \]
+Quindi, abbiamo aggiunto i primi due vettori della base canonica per completare la base.
 
 \section{Matrici}
 
@@ -166,7 +261,8 @@ La forma a scalini per colonne garantisce l'indipendenza lineare perché ogni ve
 \end{definition}
 
 \begin{definition}{Traccia}{traccia}
-    La traccia di una \hyperref[def:matrice_quadrata]{matrice quadrata} è la somma degli elementi sulla sua diagonale principale. Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è $6+7=13$.
+    La traccia di una \hyperref[def:matrice_quadrata]{matrice quadrata} è la somma degli elementi sulla sua diagonale principale.
+    Ad esempio, la traccia di $\begin{pmatrix} 6 & 2 \\ 5 & 7 \end{pmatrix}$ è $6+7=13$.
 \end{definition}
 
 \subsection{Tipologie di Matrici}
@@ -192,16 +288,19 @@ Una matrice quadrata $A$ si dice simmetrica se è uguale alla sua trasposta ($A 
 \end{definition}
 
 \begin{definition}{Matrice Antisimmetrica}{matrice_anti_simmetrica}
-Una matrice quadrata $A$ si dice antisimmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$. Questo implica che gli elementi sulla diagonale principale sono nulli.
+Una matrice quadrata $A$ si dice antisimmetrica (o emisimmetrica) se è uguale all'opposto della sua trasposta ($A = -A^T$), ovvero se $a_{ij} = -a_{ji}$ per ogni $i,j$.
+Questo implica che gli elementi sulla diagonale principale sono nulli.
 \end{definition}
 
 \subsection{Isomorfismi}
 
 \begin{definition}{Isomorfismo}{isomorfismo}
-    Un isomorfismo è un'applicazione lineare e biiettiva tra due \hyperref[def:spazio_vettoriale]{spazi vettoriali} $V$ e $W$ (definiti sullo stesso campo). Due spazi vettoriali sono isomorfi se e solo se hanno la stessa \hyperref[def:dimensione_spazio_vettoriale]{dimensione}.
+    Un isomorfismo è un'applicazione lineare e biiettiva tra due \hyperref[def:spazio_vettoriale]{spazi vettoriali} $V$ e $W$ (definiti sullo stesso campo).
+    Due spazi vettoriali sono isomorfi se e solo se hanno la stessa \hyperref[def:dimensione_spazio_vettoriale]{dimensione}.
 \end{definition}
 
-Un esempio classico di isomorfismo è quello tra lo spazio dei polinomi $\mathbb{R}[x]_{\le n}$ e lo spazio vettoriale $\mathbb{R}^{n+1}$. L'isomorfismo associa a ogni polinomio il vettore dei suoi coefficienti:
+Un esempio classico di isomorfismo è quello tra lo spazio dei polinomi $\mathbb{R}[x]_{\le n}$ e lo spazio vettoriale $\mathbb{R}^{n+1}$.
+L'isomorfismo associa a ogni polinomio il vettore dei suoi coefficienti:
 \[ a_0 + a_1 x + a_2 x^2 + \dots + a_n x^n \quad \longleftrightarrow \quad \begin{pmatrix}
     a_0 \\
     a_1 \\
