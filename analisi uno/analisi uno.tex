@@ -11,16 +11,20 @@
 \usepackage{tcolorbox}
 \tcbuselibrary{theorems}
 
-% This creates a new tcolorbox for definitions
-\newtcbtheorem{definition}{Definizione} % {box name}{display name}
+% Aggiungo pgfplots per disegnare i grafici
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Questo crea un nuovo tcolorbox per le definizioni
+\newtcbtheorem{definition}{Definizione} % {nome box}{nome visualizzato}
 {
     colback=magenta!10!white,
     colframe=magenta!80!black,
     fonttitle=\bfseries
 }
-{def} % This is a prefix for the label, so you can reference it like \ref{def:vector_space}
+{def} % Questo è un prefisso per la label
 
-\newtcbtheorem{theorem}{Teorema} % {box name}{display name}
+\newtcbtheorem{theorem}{Teorema} % {nome box}{nome visualizzato}
 {
     colback=blue!10!white,
     colframe=blue!80!black,
@@ -28,15 +32,15 @@
 }
 {thm}
 
-\newtcbtheorem{exercise}{Esercizio} % {box name}{display name}
-{
+% Box per le spiegazioni
+\newtcbtheorem{explanation}{Spiegazione}{
     colback=green!10!white,
-    colframe=green!80!black,
+    colframe=green!60!black,
     fonttitle=\bfseries
 }
-{exc}
+{expl}
 
-\title{Algebra Lineare}
+\title{Analisi Matematica}
 \author{Federico Veronesi}
 
 \begin{document}
@@ -51,9 +55,8 @@
 
 \subsection{Definizione}
 
-\begin{definition}{Logaritmo}{def:logaritmo}
-    Dati due numeri reali positivi $a$ e $b$, con $b \neq 1$, il \textbf{logaritmo} in base $b$ di $a$ è l'esponente $c$ a cui elevare $b$ per ottenere $a$.
-    \\[1em]
+\begin{definition}{Logaritmo}{logaritmo}
+    Dati due numeri reali positivi $a$ e $b$, con $b \neq 1$, il \textbf{logaritmo} in base $b$ di $a$ è l'esponente $c$ a cui elevare $b$ per ottenere $a$. \\[1em]
     In notazione:
     $$ \log_b(a) = c \iff b^c = a $$
     Dove:
@@ -62,15 +65,13 @@
         \item $a$ è l' \textbf{argomento} ($a > 0$)
         \item $c$ è il \textbf{logaritmo}
     \end{itemize}
-    \vspace{1em}
-    "Il logaritmo è l'operazione inversa dell'elevamento a potenza. Risponde semplicemente alla domanda: 'a quale numero devo elevare la base per ottenere l'argomento?'"
-    \\[1em]
-    "Ad esempio, $\log_2(8) = 3$ perché $2^3 = 8$."
 \end{definition}
+
+Ad esempio, $\log_2(8) = 3$ poiché $2^3 = 8$.
 
 \subsection{Proprietà}
 
-\begin{theorem}{Proprietà dei Logaritmi}{thm:log_properties}
+\begin{theorem}{Proprietà dei Logaritmi}{log_properties}
     Siano $x, y > 0$, $b > 0$ e $b \neq 1$, e $k \in \mathbb{R}$. Valgono le seguenti proprietà:
     \begin{itemize}
         \item \textbf{Logaritmo di un prodotto}: $\log_b(x \cdot y) = \log_b(x) + \log_b(y)$
@@ -80,43 +81,125 @@
     \end{itemize}
     Inoltre, valgono questi casi notevoli:
     \begin{itemize}
-        \item $\log_b(1) = 0$ (perché $b^0 = 1$)
-        \item $\log_b(b) = 1$ (perché $b^1 = b$)
+        \item $\log_b(1) = 0$
+        \item $\log_b(b) = 1$
     \end{itemize}
-    \vspace{1em}
-    "Le proprietà dei logaritmi ci permettono di 'semplificare' le operazioni: trasformano le moltiplicazioni in somme, le divisioni in sottrazioni e le potenze in moltiplicazioni."
 \end{theorem}
 
+\subsection{Grafici della Funzione Logaritmica}
+Il grafico della funzione $f(x) = \log_b(x)$ dipende dalla base $b$.
+\begin{itemize}
+    \item \textbf{Se $b > 1$}, la funzione è crescente.
+    \item \textbf{Se $0 < b < 1$}, la funzione è decrescente.
+\end{itemize}
+In entrambi i casi, il dominio è $(0, +\infty)$ e l'asse $y$ è un asintoto verticale.
 
-\subsection{Esercizi}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    title={Grafico di $y = \log_b(x)$ con $b>1$},
+    domain=0.1:10,
+    samples=100,
+    legend pos=north west
+]
+\addplot[blue, thick] {ln(x)};
+\legend{$\ln(x)$}
+\end{axis}
+\end{tikzpicture}
+\caption{Esempio di funzione logaritmica con base $b=e > 1$.}
+\end{figure}
 
-\begin{exercise}{Proprietà}{}
-    Enuncia tutte le proprietà dei logaritmi.
-\end{exercise}
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    title={Grafico di $y = \log_b(x)$ con $0<b<1$},
+    domain=0.1:10,
+    samples=100,
+    legend pos=north east
+]
+\addplot[red, thick] {log2(x)/log2(0.5)};
+\legend{$\log_{0.5}(x)$}
+\end{axis}
+\end{tikzpicture}
+\caption{Esempio di funzione logaritmica con base $b=0.5 < 1$.}
+\end{figure}
+
 
 \section{Funzioni}
 
 \subsection{Definizioni}
 
 \begin{definition}{Funzione Iniettiva}{funzione_iniettiva}
-    Una funzione è iniettiva quando tutti gli elementi del dominio hanno immagine diversa.
-
-    In notazione: $ \forall a_1, a_2 \in \mathbb{R}: a_1 \neq a_2 \implies f(a_1) \neq f(a_2)$
+    Una funzione si dice iniettiva se a elementi distinti del dominio corrispondono immagini distinte nel codominio. In notazione: $ \forall a_1, a_2 \in A: a_1 \neq a_2 \implies f(a_1) \neq f(a_2)$
 \end{definition}
 
 \begin{definition}{Funzione Suriettiva}{funzione_suriettiva}
-    Una funzione è suriettiva quando non esistono elementi \textit{superflui} nel codominio.
-
-    In notazione: $ \forall b \in B \, \exists \, a \in A: f(a) = b $
+    Una funzione si dice suriettiva quando ogni elemento del codominio è immagine di almeno un elemento del dominio. In notazione: $ \forall b \in B \, \exists \, a \in A: f(a) = b $
 \end{definition}
 
 \begin{definition}{Funzione Bigettiva}{funzione_bigettiva}
-    Una funzione è bigettiva quando è sia \hyperref[def:funzione_iniettiva]{iniettiva} che \hyperref[def:funzione_suriettiva]{suriettiva}
+    Una funzione è bigettiva (o biunivoca) quando è sia iniettiva che suriettiva.
 \end{definition}
 
 \begin{definition}{Funzione Inversa}{funzione_inversa}
-    Una funzione $g$ è l'inversa di $f$ quando $g(f(a)) = a$
+    Data una funzione bigettiva $f: A \to B$, la sua funzione inversa è la funzione $f^{-1}: B \to A$ tale che la composizione $f^{-1} \circ f$ è la funzione identità su $A$.
 \end{definition}
+
+\subsection{Funzione Esponenziale}
+La funzione esponenziale è una funzione del tipo $f(x) = b^x$, dove la base $b$ è un numero reale positivo e diverso da 1. È la funzione inversa della funzione logaritmica.
+Il grafico della funzione esponenziale dipende dalla base $b$:
+\begin{itemize}
+    \item \textbf{Se $b > 1$}, la funzione è crescente.
+    \item \textbf{Se $0 < b < 1$}, la funzione è decrescente.
+\end{itemize}
+L'asse $x$ è un asintoto orizzontale per la funzione.
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    title={Grafico di $y = b^x$ con $b>1$},
+    domain=-3:3,
+    samples=100,
+    legend pos=north west
+]
+\addplot[blue, thick] {exp(x)};
+\legend{$e^x$}
+\end{axis}
+\end{tikzpicture}
+\caption{Esempio di funzione esponenziale con base $b=e > 1$.}
+\end{figure}
+
+\begin{figure}[!htbp]
+\centering
+\begin{tikzpicture}
+\begin{axis}[
+    axis lines=middle,
+    xlabel=$x$,
+    ylabel=$y$,
+    title={Grafico di $y = b^x$ con $0<b<1$},
+    domain=-3:3,
+    samples=100,
+    legend pos=north east
+]
+\addplot[red, thick] {0.5^x};
+\legend{$(0.5)^x$}
+\end{axis}
+\end{tikzpicture}
+\caption{Esempio di funzione esponenziale con base $b=0.5 < 1$.}
+\end{figure}
+
 
 \section{Limiti}
 
@@ -128,8 +211,9 @@
         \item Un numero $M$ è il \textbf{massimo} di $A$ se $M \in A$ e $\forall a \in A, a \le M$.
         \item Un numero $m$ è il \textbf{minimo} di $A$ se $m \in A$ e $\forall a \in A, a \ge m$.
     \end{itemize}
-    "$max((0,1))$ non esiste, perché non c'è un elemento nell'insieme che sia più grande di tutti gli altri (1 è escluso). Invece, $max([0,1]) = 1$."
 \end{definition}
+
+Ad esempio, l'intervallo $(0,1)$ non ammette massimo, mentre l'intervallo $[0,1]$ ha massimo uguale a 1.
 
 \begin{definition}{Maggiorante e Minorante}{maggiorante_minorante}
     Dato un insieme $A \subseteq \mathbb{R}$:
@@ -137,7 +221,6 @@
         \item Un numero $K \in \mathbb{R}$ è un \textbf{maggiorante} di $A$ se $\forall a \in A, a \le K$.
         \item Un numero $k \in \mathbb{R}$ è un \textbf{minorante} di $A$ se $\forall a \in A, a \ge k$.
     \end{itemize}
-    "L'insieme dei maggioranti di $(0,1)$ è $[1, +\infty)$. L'insieme dei minoranti è $(-\infty, 0]$"
 \end{definition}
 
 \begin{definition}{Estremi Superiore e Inferiore}{sup_inf}
@@ -146,23 +229,36 @@
         \item L'\textbf{estremo superiore} di $A$, denotato con $\sup(A)$, è il più piccolo dei maggioranti.
         \item L'\textbf{estremo inferiore} di $A$, denotato con $\inf(A)$, è il più grande dei minoranti.
     \end{itemize}
-    "$sup((0,1)) = 1$ e $\inf((0,1)) = 0$"
 \end{definition}
 
+\subsection{Definizione di Limite}
 
-\subsection{Definizione}
-
-\begin{definition}{Limite di Successione}{limite}
-    Nota: esistono limiti convergenti e divergenti. Il professore ha solo introdotto quella del limite convergente, che segue adesso con spiegazione.
+\begin{definition}{Limite di Successione Convergente}{limite_convergente}
+    Una successione $(a_n)$ converge al limite $L \in \mathbb{R}$ se:
     \\[1em]
     $\forall \epsilon > 0, \exists N \in \mathbb{N} : \forall n > N, |a_n - L| < \epsilon$
-    \\[1em]
-    "Giochiamo a dire il numero più piccolo chiamato epsilon che puoi, perché ti garantisco che prima o poi io con questa successione mi avvicinerò talmente tanto a uno specifico valore chiamato L che la distanza fra lo specifico valore che cerco e il punto in cui la mia successione è arrivata sarà più piccola del tuo numero epsilon".
-    \\[1em]
-    "Con la mia successione mi avvicinerò tanto a uno specifico valore che qualunque distanza sarà maggiore della distanza da quello specifico valore".
 \end{definition}
 
-\subsection{Teoremi}
+\begin{explanation}{Cosa significa la definizione?}{}
+    Questa definizione, per quanto astratta, esprime un'idea semplice. Dire che una successione tende a $L$ significa che i suoi termini si "avvicinano" sempre di più a $L$.
+    La definizione lo formalizza così: possiamo rendere la distanza $|a_n - L|$ piccola a piacere (più piccola di un qualsiasi $\epsilon > 0$, anche piccolissimo), a patto di andare abbastanza avanti nella successione (scegliendo un indice $n$ più grande di un certo $N$). In altre parole, da un certo punto $N$ in poi, tutti i termini della successione si trovano in un piccolo intervallo di ampiezza $2\epsilon$ centrato su $L$.
+\end{explanation}
+
+\begin{definition}{Limite di Successione Divergente}{limite_divergente}
+    Una successione $(a_n)$ si dice divergente se tende a $\pm\infty$.
+    \begin{itemize}
+        \item Diciamo che $(a_n)$ diverge a $+\infty$ se:
+         $$ \forall M > 0, \exists N \in \mathbb{N} : \forall n > N, a_n > M $$
+        \item Diciamo che $(a_n)$ diverge a $-\infty$ se:
+         $$ \forall M < 0, \exists N \in \mathbb{N} : \forall n > N, a_n < M $$
+    \end{itemize}
+\end{definition}
+
+\begin{explanation}{Cosa significa divergere?}{}
+    Dire che una successione diverge a $+\infty$ significa che i suoi termini diventano arbitrariamente grandi. La definizione cattura questa idea: per quanto grande si scelga un numero $M$ (ad esempio $10^{100}$), è sempre possibile trovare un punto della successione (un indice $N$) dopo il quale tutti i termini $a_n$ sono ancora più grandi di $M$. Un discorso analogo vale per la divergenza a $-\infty$.
+\end{explanation}
+
+\subsection{Teoremi sui Limiti}
 
 \begin{theorem}{Teorema Dell'Algebra dei Limiti}{}
     Siano $(a_n)$ e $(b_n)$ due successioni convergenti, con $\lim_{n \to \infty} a_n = L$ e $\lim_{n \to \infty} b_n = M$. Allora:
@@ -172,36 +268,36 @@
         \item $\lim_{n \to \infty} (k \cdot a_n) = k \cdot L$, per ogni costante $k \in \mathbb{R}$
         \item $\lim_{n \to \infty} \frac{a_n}{b_n} = \frac{L}{M}$, se $M \neq 0$ e $b_n \neq 0$ per ogni $n$.
     \end{itemize}
-
-    "La operazioni fra limiti sono i limiti dei risultati delle operazioni"
 \end{theorem}
 
 \begin{theorem}{Teorema della Permanenza del Segno}{}
     Se una successione $(a_n)$ converge a un limite $L \neq 0$, allora esiste un indice $N \in \mathbb{N}$ tale che per ogni $n > N$, il termine $a_n$ ha lo stesso segno di $L$.
-
-    "Nel processo di calcolare un limite, esiste un certo numero di passaggi della successione oltre il quale il segno della successione in quel numero di passaggi ha lo stesso segno del numero a cui converge il limite"
-
-    "In un intorno di un numero diverso da zero c'è almeno un pezzettino con lo stesso segno di quel numero"
 \end{theorem}
 
 \begin{theorem}{Teorema del Confronto}{}
     Siano $(a_n)$, $(b_n)$, e $(c_n)$ tre successioni tali che $a_n \le b_n \le c_n$ definitivamente. Se $\lim_{n \to \infty} a_n = \lim_{n \to \infty} c_n = L$, allora anche $\lim_{n \to \infty} b_n = L$.
-
-    "Immaginatelo con un grafico. Se due curve ne comprendono una in mezzo, quando queste due curve si toccano, allora si toccano anche con quella che sta in mezzo"
 \end{theorem}
 
-\subsection{Limiti Notevoli}
+\subsection{Forme di Indeterminazione}
+L'algebra dei limiti non si può applicare direttamente quando le operazioni portano a una delle seguenti forme, dette \textbf{forme indeterminate} o \textbf{di indecisione}:
+\begin{center}
+    $ \left[ \frac{0}{0} \right], \quad \left[ \frac{\infty}{\infty} \right], \quad [0 \cdot \infty], \quad [+\infty - \infty], \quad [1^\infty], \quad [0^0], \quad [\infty^0] $
+\end{center}
+In questi casi, il limite deve essere calcolato con altri metodi, come l'uso dei limiti notevoli, il confronto tra infiniti o (per le funzioni) il teorema di De L'Hôpital.
 
-TODO (aspetto lezione che ce li mostrino)
+\begin{theorem}{Limiti Notevoli}{limiti_notevoli}
+    I seguenti limiti sono particolarmente utili per risolvere le forme indeterminate:
+    \begin{itemize}
+        \item $\lim_{x \to 0} \frac{\sin(x)}{x} = 1$
+        \item $\lim_{x \to 0} \frac{1 - \cos(x)}{x^2} = \frac{1}{2}$
+        \item $\lim_{x \to \pm\infty} \left(1 + \frac{1}{x}\right)^x = e$
+        \item $\lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$
+        \item $\lim_{x \to 0} \frac{e^x - 1}{x} = 1$
+        \item $\lim_{x \to 0} \frac{(1+x)^k - 1}{x} = k, \quad \forall k \in \mathbb{R}$
+    \end{itemize}
+\end{theorem}
 
-\subsection{Esercizi}
-
-\begin{exercise}{Prima Risoluzione di Limiti}{}
-    Usando esclusivamente \hyperref[def:limite]{la definizione di limite di successione}, risolvi dei limiti.
-\end{exercise}
-
-\begin{exercise}{Definizioni}{}
-    Spiega le definizioni in questo capitolo prima in modo rigoroso e poi intuitivo.
-\end{exercise}
+\section{Esercizi Svolti}
+In classe è stata risolta la seguente disequazione: $ \sqrt{|x-1|} \le 2-x $.
 
 \end{document}
