@@ -1,0 +1,39 @@
+\usepackage{amsmath}
+\usepackage[italian]{babel}
+\usepackage[a4paper,top=2cm,bottom=2cm,left=3cm,right=3cm,marginparwidth=1.75cm]{geometry}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{xcolor}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+
+% Aggiungo pgfplots per disegnare i grafici
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+
+% Questo crea un nuovo tcolorbox per le definizioni
+\newtcbtheorem{definition}{Definizione} % {nome box}{nome visualizzato}
+{
+    colback=magenta!10!white,
+    colframe=magenta!80!black,
+    fonttitle=\bfseries
+}
+{def} % Questo è un prefisso per la label
+
+\newtcbtheorem{theorem}{Teorema} % {nome box}{nome visualizzato}
+{
+    colback=blue!10!white,
+    colframe=blue!80!black,
+    fonttitle=\bfseries
+}
+{thm}
+
+% Box per le spiegazioni
+\newtcbtheorem{explanation}{Spiegazione}{
+    colback=green!10!white,
+    colframe=green!60!black,
+    fonttitle=\bfseries
+}
+{expl}

@@ -1,0 +1,95 @@
+\section{Limiti}
+
+\subsection{Preambolo}
+
+\begin{definition}{Massimo e Minimo di Un Insieme}{max_min}
+    Dato un insieme $A \subseteq \mathbb{R}$:
+    \begin{itemize}
+        \item Un numero $M$ è il \textbf{massimo} di $A$ se $M \in A$ e $\forall a \in A, a \le M$.
+        \item Un numero $m$ è il \textbf{minimo} di $A$ se $m \in A$ e $\forall a \in A, a \ge m$.
+    \end{itemize}
+\end{definition}
+
+Ad esempio, l'intervallo $(0,1)$ non ammette massimo, mentre l'intervallo $[0,1]$ ha massimo uguale a 1.
+
+\begin{definition}{Maggiorante e Minorante}{maggiorante_minorante}
+    Dato un insieme $A \subseteq \mathbb{R}$:
+    \begin{itemize}
+        \item Un numero $K \in \mathbb{R}$ è un \textbf{maggiorante} di $A$ se $\forall a \in A, a \le K$.
+        \item Un numero $k \in \mathbb{R}$ è un \textbf{minorante} di $A$ se $\forall a \in A, a \ge k$.
+    \end{itemize}
+\end{definition}
+
+\begin{definition}{Estremi Superiore e Inferiore}{sup_inf}
+    Dato un insieme $A \subseteq \mathbb{R}$:
+    \begin{itemize}
+        \item L'\textbf{estremo superiore} di $A$, denotato con $\sup(A)$, è il più piccolo dei maggioranti.
+        \item L'\textbf{estremo inferiore} di $A$, denotato con $\inf(A)$, è il più grande dei minoranti.
+    \end{itemize}
+\end{definition}
+
+\subsection{Definizione di Limite}
+
+\begin{definition}{Limite di Successione Convergente}{limite_convergente}
+    Una successione $(a_n)$ converge al limite $L \in \mathbb{R}$ se:
+    \\[1em]
+    $\forall \epsilon > 0, \exists N \in \mathbb{N} : \forall n > N, |a_n - L| < \epsilon$
+\end{definition}
+
+\begin{explanation}{Cosa significa la definizione?}{}
+    Questa definizione, per quanto astratta, esprime un'idea semplice. Dire che una successione tende a $L$ significa che i suoi termini si "avvicinano" sempre di più a $L$.
+    La definizione lo formalizza così: possiamo rendere la distanza $|a_n - L|$ piccola a piacere (più piccola di un qualsiasi $\epsilon > 0$, anche piccolissimo), a patto di andare abbastanza avanti nella successione (scegliendo un indice $n$ più grande di un certo $N$). In altre parole, da un certo punto $N$ in poi, tutti i termini della successione si trovano in un piccolo intervallo di ampiezza $2\epsilon$ centrato su $L$.
+\end{explanation}
+
+\begin{definition}{Limite di Successione Divergente}{limite_divergente}
+    Una successione $(a_n)$ si dice divergente se tende a $\pm\infty$.
+    \begin{itemize}
+        \item Diciamo che $(a_n)$ diverge a $+\infty$ se:
+         $$ \forall M > 0, \exists N \in \mathbb{N} : \forall n > N, a_n > M $$
+        \item Diciamo che $(a_n)$ diverge a $-\infty$ se:
+         $$ \forall M < 0, \exists N \in \mathbb{N} : \forall n > N, a_n < M $$
+    \end{itemize}
+\end{definition}
+
+\begin{explanation}{Cosa significa divergere?}{}
+    Dire che una successione diverge a $+\infty$ significa che i suoi termini diventano arbitrariamente grandi. La definizione cattura questa idea: per quanto grande si scelga un numero $M$ (ad esempio $10^{100}$), è sempre possibile trovare un punto della successione (un indice $N$) dopo il quale tutti i termini $a_n$ sono ancora più grandi di $M$. Un discorso analogo vale per la divergenza a $-\infty$.
+\end{explanation}
+
+\subsection{Teoremi sui Limiti}
+
+\begin{theorem}{Teorema Dell'Algebra dei Limiti}{}
+    Siano $(a_n)$ e $(b_n)$ due successioni convergenti, con $\lim_{n \to \infty} a_n = L$ e $\lim_{n \to \infty} b_n = M$. Allora:
+    \begin{itemize}
+        \item $\lim_{n \to \infty} (a_n \pm b_n) = L \pm M$
+        \item $\lim_{n \to \infty} (a_n \cdot b_n) = L \cdot M$
+        \item $\lim_{n \to \infty} (k \cdot a_n) = k \cdot L$, per ogni costante $k \in \mathbb{R}$
+        \item $\lim_{n \to \infty} \frac{a_n}{b_n} = \frac{L}{M}$, se $M \neq 0$ e $b_n \neq 0$ per ogni $n$.
+    \end{itemize}
+\end{theorem}
+
+\begin{theorem}{Teorema della Permanenza del Segno}{}
+    Se una successione $(a_n)$ converge a un limite $L \neq 0$, allora esiste un indice $N \in \mathbb{N}$ tale che per ogni $n > N$, il termine $a_n$ ha lo stesso segno di $L$.
+\end{theorem}
+
+\begin{theorem}{Teorema del Confronto}{}
+    Siano $(a_n)$, $(b_n)$, e $(c_n)$ tre successioni tali che $a_n \le b_n \le c_n$ definitivamente. Se $\lim_{n \to \infty} a_n = \lim_{n \to \infty} c_n = L$, allora anche $\lim_{n \to \infty} b_n = L$.
+\end{theorem}
+
+\subsection{Forme di Indeterminazione}
+L'algebra dei limiti non si può applicare direttamente quando le operazioni portano a una delle seguenti forme, dette \textbf{forme indeterminate} o \textbf{di indecisione}:
+\begin{center}
+    $ \left[ \frac{0}{0} \right], \quad \left[ \frac{\infty}{\infty} \right], \quad [0 \cdot \infty], \quad [+\infty - \infty], \quad [1^\infty], \quad [0^0], \quad [\infty^0] $
+\end{center}
+In questi casi, il limite deve essere calcolato con altri metodi, come l'uso dei limiti notevoli, il confronto tra infiniti o (per le funzioni) il teorema di De L'Hôpital.
+
+\begin{theorem}{Limiti Notevoli}{limiti_notevoli}
+    I seguenti limiti sono particolarmente utili per risolvere le forme indeterminate:
+    \begin{itemize}
+        \item $\lim_{x \to 0} \frac{\sin(x)}{x} = 1$
+        \item $\lim_{x \to 0} \frac{1 - \cos(x)}{x^2} = \frac{1}{2}$
+        \item $\lim_{x \to \pm\infty} \left(1 + \frac{1}{x}\right)^x = e$
+        \item $\lim_{x \to 0} \frac{\ln(1+x)}{x} = 1$
+        \item $\lim_{x \to 0} \frac{e^x - 1}{x} = 1$
+        \item $\lim_{x \to 0} \frac{(1+x)^k - 1}{x} = k, \quad \forall k \in \mathbb{R}$
+    \end{itemize}
+\end{theorem}
